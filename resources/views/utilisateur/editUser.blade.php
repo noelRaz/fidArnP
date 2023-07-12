@@ -3,7 +3,7 @@
 <!-- Default box -->
 <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Modification de personnel</h3>
+          <h3 class="card-title">Modification d'utilisateur</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -28,29 +28,34 @@
 
             @endif
 
-            <form method="POST" action="{{url('updateUser/'.$pers->id)}}">
+            <form method="POST" action="{{url('updateUser/'.$user->id)}}">
+                <label value="">{{ $user->name}}</label>
                 @csrf
                 @method('PUT')
                 <div class="grid grid-cols-1 md:grid-cols-2">
                     <!--Admin-->
                     <div class="mt-4 right-2">
                         <label>Admin</label>
-                        <input id="persNomModif"
+                        <input id="userModif"
                                 class="uppercase border block rounded mt-1 bf-full w-full"
-                                type="text" name="persNom"
-                                value="{{ $pers->persNom}}"/>
+                                type="number" name="userAdmin"
+                                value="{{ $user->admin}}"/>
+                        <?php if ($user->admin == 1) {?>
+                            <input type="radio" value="0" name="userAdmin" class="border block" checked />
+                        <?php } ?>
+
                     </div>
 
                     <!--Etat-->
                     <div class="mt-4 left-2">
                         <label>Etat</label>
-                        <input id="persPrenomModif"
+                        <input id="userModif"
                                 class="capitalize border block rounded mt-1 bf-full w-full"
-                                type="text" name="persPrenom"
-                                value="{{ $pers->persPrenom}}"/>
+                                type="number" name="userEtat"
+                                value="{{ $user->role}}"/>
                     </div>
                     <div class="flex mt-4">
-                        <a href="{{url("listepersonnel/")}}">
+                        <a href="{{url("utilisateur/")}}">
                             <button type="button" class="btnbtn btn2 border-transparent right-2" > Annuler</button>
                         </a>
                         <button type="submit" class="btnbtn btn1 left-2" onclick= "return confirm('Voulez-vous vraiment modifier')">

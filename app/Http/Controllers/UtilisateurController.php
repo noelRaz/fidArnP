@@ -22,21 +22,23 @@ class UtilisateurController extends Controller
         return redirect('utilisateur');
     }
 
-    public function activeUser(Request $request, $id)
+    public function editUser($id)
     {
-        $user = User::find($id);
-        $user ->role = 1;
-
-        $user -> update();
-        return redirect('utilisateur');
+        $detail = User::find($id);
+        $data = [
+            'user' => $detail,
+        ];
+        return view('utilisateur.editUser', $data);
     }
-
-    public function desactiveUser(Request $request, $id)
+    public function updateUser(Request $request, $id)
     {
         $user = User::find($id);
-        $user ->role = 0;
+        $user ->admin = $request->input('userAdmin');
+        $user ->role = $request->input('userEtat');
+
 
         $user -> update();
+        Alert::success('Modification', 'Utilisateur modifier avec succès');
         return redirect('utilisateur');
     }
 }

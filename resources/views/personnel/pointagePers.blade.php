@@ -124,18 +124,25 @@
 
     <script src="js/scanner.js"></script>
     <script>
-        function onScanSuccess(decodedText, decodedResult) {
-            $("#persCode").val(decodedText);
-        }
+        // function onScanSuccess(decodedText, decodedResult) {
+        //     $("#persCode").val(decodedText);
+        // }
 
-        function onScanFailure(error) {
-            console.warn(`Code scan error = ${error}`);
-        }
+        // function onScanFailure(error) {
+        //     console.warn(`Code scan error = ${error}`);
+        // }
 
-        let html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader",
-            { fps: 10, qrbox: {width: 250, height: 250} },
-            /* verbose= */ false);
-            html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+        // let html5QrcodeScanner = new Html5QrcodeScanner(
+        //     "reader",
+        //     { fps: 10, qrbox: {width: 250, height: 250} },
+        //     /* verbose= */ false);
+        //     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+
+            function onScanSuccess(decodedText, decodedResult) {
+                $("#persCode").val(decodedText);
+            }
+            var html5QrcodeScanner = new Html5QrcodeScanner(
+                "qr-reader", { fps: 10, qrbox: 250 });
+                html5QrcodeScanner.render(onScanSuccess);
     </script>
 @endsection

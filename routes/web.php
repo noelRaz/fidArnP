@@ -72,11 +72,17 @@ Route::get('listeVoiture', [VoitureController::class, 'listeVoi'])->middleware([
 //Utilisateur
 Route::get('/utilisateur', [UtilisateurController::class, 'index'])->middleware(['auth'])->name('Utilisateur');
 Route::get('/deleteUser/{id}', [UtilisateurController::class, 'deleteUser'])->middleware(['auth'])->name('DeleteUser');
-Route::post('activeUser/{id}', [UtilisateurController::class, 'activeUser']);
-Route::post('desactiveUser/{id}', [UtilisateurController::class, 'desactiveUser']);
+Route::get('/editUser/{id}', [UtilisateurController::class, 'editUser'])->middleware(['auth'])->name('editeUser');
+Route::put('/updateUser/{id}', [UtilisateurController::class, 'updateUser']);
 
 //Création PDF
 Route::get('create-pdf-file', [PDFController::class, 'index']);
+
+//QR Code
+Route::get('/qrcode', function () {
+    return view('qrcode');
+})->name('qrcode');
+
 
 //A propos
 Route::get('/a_propos', [AproposController::class, 'index'])->middleware(['auth'])->name('apropos');
